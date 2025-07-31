@@ -1,0 +1,16 @@
+{
+  "tickers": [
+    "AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "TSLA", "META", "NVDA", "NFLX", "ADBE",
+    "CRM", "AMD", "INTC", "ORCL", "IBM", "CSCO", "QCOM", "AVGO", "TXN", "MU",
+    "JPM", "BAC", "WFC", "GS", "MS", "C", "BLK", "AXP", "SPGI", "CME", "ICE", "COF",
+    "JNJ", "UNH", "PFE", "ABBV", "MRK", "TMO", "ABT", "BMY", "LLY", "MDT", "GILD", "AMGN",
+    "WMT", "HD", "PG", "KO", "PEP", "DIS", "NKE", "COST", "SBUX", "MCD", "TGT", "LOW",
+    "XOM", "CVX", "COP", "SLB", "EOG", "KMI", "OXY", "PSX", "VLO", "MPC", "HAL", "BKR",
+    "BRK.B", "V", "MA", "NEE", "HON", "PM", "RTX", "UNP", "CAT", "DE", "MMM", "GE",
+    "SPY", "QQQ", "DIA", "IWM", "VTI", "VOO", "VEA", "VWO", "AGG", "BND", "GLD", "SLV"
+    // and more tickers if you want, just extend the list
+  ]
+}
+
+
+// this isn't done. go to stock-manager.tsx and the stuff from line 12 to 35. it should get the data from here and then plug right in as normal. or put all these into the other one
