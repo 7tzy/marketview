@@ -1,0 +1,482 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsla(0, 0%, 98%, 0.9);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsla(60, 4.8%, 95.9%, 0.8);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsla(0, 0%, 100%, 0.95);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsla(0, 0%, 100%, 0.7);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsla(20, 5.9%, 90%, 0.3);
+  --input: hsla(20, 5.9%, 90%, 0.8);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsla(60, 4.8%, 95.9%, 0.8);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsla(60, 4.8%, 95.9%, 0.8);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.75rem;
+  
+  /* Financial theme colors */
+  --financial-blue: hsl(43, 74%, 49%);
+  --professional-gray: hsl(215, 25%, 46%);
+  --success-green: hsl(159, 75%, 39%);
+  --alert-red: hsl(4, 75%, 49%);
+  --surface: hsla(0, 0%, 100%, 0.8);
+  --glass-bg: hsla(0, 0%, 100%, 0.1);
+  --glass-border: hsla(0, 0%, 100%, 0.2);
+}
+
+.dark {
+  --background: hsla(240, 10%, 3.9%, 0.95);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsla(240, 3.7%, 15.9%, 0.8);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsla(240, 10%, 8%, 0.95);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsla(240, 10%, 8%, 0.6);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsla(240, 3.7%, 25%, 0.3);
+  --input: hsla(240, 3.7%, 15.9%, 0.8);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsla(240, 3.7%, 15.9%, 0.8);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsla(240, 3.7%, 15.9%, 0.8);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 50%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.75rem;
+  
+  /* Financial theme colors for dark mode */
+  --financial-blue: hsl(43, 84%, 59%);
+  --professional-gray: hsl(215, 15%, 66%);
+  --success-green: hsl(159, 65%, 49%);
+  --alert-red: hsl(4, 65%, 59%);
+  --surface: hsla(240, 10%, 8%, 0.8);
+  --glass-bg: hsla(255, 255%, 255%, 0.05);
+  
+  /* Champagne luxury theme colors */
+  --accent-champagne: 218 165 32;
+  --accent-champagne-hover: 184 134 11;
+  --glass-border: hsla(255, 255%, 255%, 0.1);
+}
+
+/* Luxury theme overrides - only apply when colors are enabled */
+.colors-enabled.luxury-theme {
+  --success-green: var(--accent-champagne);
+}
+
+.colors-enabled.luxury-theme .dark {
+  --success-green: var(--accent-champagne);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    background: linear-gradient(135deg, 
+      hsl(240, 30%, 8%) 0%, 
+      hsl(220, 30%, 12%) 25%, 
+      hsl(200, 30%, 10%) 50%, 
+      hsl(180, 30%, 8%) 75%, 
+      hsl(160, 30%, 6%) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  .light body {
+    background: linear-gradient(135deg, 
+      hsl(220, 30%, 95%) 0%, 
+      hsl(200, 30%, 98%) 25%, 
+      hsl(180, 30%, 96%) 50%, 
+      hsl(160, 30%, 97%) 75%, 
+      hsl(140, 30%, 99%) 100%);
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  .text-financial-blue {
+    color: var(--financial-blue);
+  }
+  
+  .text-professional-gray {
+    color: var(--professional-gray);
+  }
+  
+  .text-success-green {
+    color: var(--success-green);
+  }
+  
+  .text-alert-red {
+    color: var(--alert-red);
+  }
+  
+  .bg-surface {
+    background-color: var(--surface);
+  }
+
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px hsla(0, 0%, 0%, 0.1);
+  }
+
+  .glass-header {
+    background: var(--card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 4px 16px hsla(0, 0%, 0%, 0.1);
+  }
+
+  .neon-hover {
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .neon-hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent;
+    border-radius: inherit;
+    background: transparent;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: -1;
+  }
+
+  /* Neon color variables */
+  :root {
+    --neon-primary: hsl(120, 100%, 35%);
+    --neon-secondary: hsl(120, 100%, 45%);
+  }
+
+  :root.colors-enabled.luxury-theme {
+    --neon-primary: hsl(43, 74%, 49%);
+    --neon-secondary: hsl(43, 84%, 59%);
+  }
+
+  /* Default state - no neon colors when colors are disabled */
+  :root:not(.colors-enabled) {
+    --neon-primary: transparent;
+    --neon-secondary: transparent;
+  }
+
+  .neon-hover:hover::before {
+    border: 2px solid var(--neon-primary);
+    opacity: 1;
+    transition: opacity 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+    box-shadow: 
+      0 0 10px var(--neon-primary),
+      0 0 20px var(--neon-primary),
+      inset 0 0 10px hsla(var(--neon-primary), 0.1);
+  }
+
+  /* Remove zoom effect from market overview cards */
+  .market-overview .neon-hover:hover {
+    transform: none !important;
+  }
+
+  /* PC-only hover effects */
+  .neon-hover-pc {
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .neon-hover-pc::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent;
+    border-radius: inherit;
+    background: transparent;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: -1;
+  }
+
+  /* Only apply hover effects on non-touch devices (PC) AND when colors are enabled */
+  @media (hover: hover) and (pointer: fine) {
+    .colors-enabled .neon-hover-pc:hover::before {
+      border: 2px solid var(--neon-primary);
+      opacity: 1;
+      transition: opacity 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+      box-shadow: 
+        0 0 10px var(--neon-primary),
+        0 0 20px var(--neon-primary),
+        inset 0 0 10px hsla(var(--neon-primary), 0.1);
+    }
+
+    .colors-enabled .neon-hover-pc:hover {
+      transform: scale(1.05);
+    }
+
+    /* Also apply to regular neon-hover elements when colors are enabled */
+    .colors-enabled .neon-hover:hover::before {
+      border: 2px solid var(--neon-primary);
+      opacity: 1;
+      transition: opacity 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+      box-shadow: 
+        0 0 10px var(--neon-primary),
+        0 0 20px var(--neon-primary),
+        inset 0 0 10px hsla(var(--neon-primary), 0.1);
+    }
+  }
+
+  /* Carousel styles */
+  .carousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    width: 400%; /* 4 views */
+  }
+
+  .carousel-slide {
+    min-width: 25%; /* Each slide takes 1/4 of the track */
+    flex-shrink: 0;
+  }
+
+  .carousel-slide.exiting {
+    transition: transform 0.5s ease-in;
+  }
+
+  /* Login button animation */
+  .login-button {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .login-button:active {
+    background: linear-gradient(135deg, 
+      hsl(43, 74%, 49%) 0%, 
+      hsl(43, 84%, 59%) 100%) !important;
+    transition: background 0.3s ease-in;
+  }
+
+  /* Mobile-responsive button styling */
+  @media (max-width: 768px) {
+    /* Remove ALL hover effects on mobile/touch devices - regardless of color settings */
+    .neon-hover,
+    .neon-hover:hover,
+    .neon-hover-pc,
+    .neon-hover-pc:hover,
+    .colors-enabled .neon-hover:hover,
+    .colors-enabled .neon-hover-pc:hover {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    .neon-hover::before,
+    .neon-hover-pc::before,
+    .colors-enabled .neon-hover::before,
+    .colors-enabled .neon-hover-pc::before {
+      display: none !important;
+    }
+    
+    .stock-manager-buttons {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .stock-manager-buttons > button {
+      width: 100%;
+      justify-content: center;
+      background-color: var(--card) !important;
+      color: var(--card-foreground) !important;
+      border-color: var(--border) !important;
+    }
+    
+    .stock-manager-buttons > button:hover {
+      background-color: var(--accent) !important;
+      color: var(--accent-foreground) !important;
+    }
+
+    /* Fix mobile button color issues - ensure normal appearance */
+    .stock-manager-buttons > button,
+    button[variant="outline"],
+    .resource-section button {
+      background-color: var(--card) !important;
+      color: var(--card-foreground) !important;
+      border-color: var(--border) !important;
+    }
+    
+    .stock-manager-buttons > button:hover,
+    button[variant="outline"]:hover,
+    .neon-hover:hover {
+      background-color: var(--accent) !important;
+      color: var(--accent-foreground) !important;
+    }
+  }
+
+  /* Frosted dropdown styling */
+  .frosted-dropdown {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px hsla(0, 0%, 0%, 0.2);
+  }
+
+  /* Custom scrollbar styling */
+  .themed-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .themed-scrollbar::-webkit-scrollbar-track {
+    background: var(--muted);
+    border-radius: 4px;
+  }
+
+  .themed-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--neon-primary);
+    border-radius: 4px;
+    opacity: 0.7;
+  }
+
+  .themed-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-secondary);
+    opacity: 1;
+  }
+
+  /* Smooth fade-in glow effect */
+
+
+
+  /* Slide animations for view transitions */
+  .slide-view {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+  }
+
+  .slide-out-left {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  .slide-in-right {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  /* Enhanced mobile responsiveness */
+  @media (max-width: 640px) {
+    .stock-manager-buttons {
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    .stock-manager-buttons > button {
+      min-width: 100%;
+      text-align: center;
+    }
+    
+    /* Fix view toggle button positioning on mobile */
+    .view-toggle-button {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+    }
+
+    /* Additional mobile button fixes - more specific targeting */
+    .stock-manager-buttons button, 
+    button[variant="outline"],
+    .mobile-button-fix {
+      background-color: var(--background) !important;
+      background: var(--glass-bg) !important;
+      color: var(--foreground) !important;
+      border-color: var(--border) !important;
+      border-width: 1px !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+    }
+
+    .stock-manager-buttons button:hover, 
+    button[variant="outline"]:hover,
+    .mobile-button-fix:hover {
+      background-color: var(--muted) !important;
+      background: var(--accent) !important;
+      color: var(--accent-foreground) !important;
+    }
+  }
+}
+
+
+/* Square checkboxes with champagne accent */
+.checkbox-square {
+  border: 2px solid;
+  @apply border-gray-300 dark:border-gray-600 bg-transparent;
+  border-radius: 0;
+}
+
+.checkbox-square[data-state="checked"] {
+  background-color: var(--financial-blue);
+  border-color: var(--financial-blue);
+}
+
+/* Stronger backdrop blur for popups */
+.enhanced-backdrop-blur {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Toast notifications above popups */
+.toast-container {
+  z-index: 10001 !important;
+}
+
+/* Frosted dropdown styles */
+.frosted-dropdown {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.dark .frosted-dropdown {
+  background: rgba(0, 0, 0, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Mobile background fixes */
+@media (max-width: 768px) {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+  
+  .dark .glass-card {
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+}

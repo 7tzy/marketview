@@ -1,0 +1,95 @@
+import { Layout, LayoutDashboard } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
+interface UserPreferences {
+  showMarketOverview: boolean;
+  showContent: boolean;
+}
+
+interface ContentVisibilityToggleProps {
+  onToggle?: (enabled: boolean) => void;
+}
+
+export function ContentVisibilityToggle({ onToggle }: ContentVisibilityToggleProps) {
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+  
+  // Fetch user preferences
+  const { data: preferences, isLoading } = useQuery<UserPreferences>({
+    queryKey: ['/api/user-preferences'],
+    staleTime: 5 * 60 * 1000, // 5 minutes
+  });
+
+  // Mutation to update preferences
+  const updatePreferencesMutation = useMutation({
+    mutationFn: async (newPreferences: { showMarketOverview: boolean; showContent: boolean }) => {
+      const response = await fetch('/api/user-preferences', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newPreferences),
+        credentials: 'include',
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to update preferences');
+      }
+      
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/user-preferences'] });
+      toast({
+        title: "Preference Updated",
+        description: "Content visibility setting saved.",
+      });
+    },
+    onError: (error: any) => {
+      console.error('Error updating preferences:', error);
+      toast({
+        title: "Error",
+        description: "Failed to save preference. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleToggle = () => {
+    if (!preferences) return;
+    
+    const newShowContent = !preferences.showContent;
+    updatePreferencesMutation.mutate({
+      showMarketOverview: preferences.showMarketOverview,
+      showContent: newShowContent
+    });
+    
+    onToggle?.(newShowContent);
+  };
+
+  if (isLoading) {
+    return (
+      <Button variant="outline" size="icon" disabled>
+        <Layout className="h-4 w-4" />
+      </Button>
+    );
+  }
+
+  return (
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={handleToggle}
+      disabled={updatePreferencesMutation.isPending}
+      title={preferences?.showContent ? "Hide Market Data & Watchlist" : "Show Market Data & Watchlist"}
+    >
+      {preferences?.showContent ? (
+        <LayoutDashboard className="h-4 w-4" />
+      ) : (
+        <Layout className="h-4 w-4" />
+      )}
+    </Button>
+  );
+}
